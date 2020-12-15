@@ -27,8 +27,7 @@ public class RunHereSubCommand extends IslandBuilderSubCommand {
         Placement placement = plugin.getPlacementManager().getPlacement(args[0]);
 
         if (placement == null) {
-            //TODO lang
-            sender.sendMessage(StringUtil.color("&cInvalid placement."));
+            language.sendPrefixed(sender, "Commands.Invalid-Placement");
             return CommandResult.FAILURE;
         }
 
@@ -36,14 +35,15 @@ public class RunHereSubCommand extends IslandBuilderSubCommand {
 
         Island island = SuperiorSkyblockAPI.getIslandAt(player.getLocation());
         if (island == null) {
-            //TODO lang
-            sender.sendMessage(StringUtil.color("&cYou're not on an island."));
+            language.send(sender, "Commands.Run-Here.Not-On-Island");
             return CommandResult.FAILURE;
         }
 
         placement.run(island.getOwner().asPlayer(), island);
-        //TODO lang
-        sender.sendMessage(StringUtil.color("&7Placement &f" + placement.getName() + "&7 ran for island &f" + island.getName()));
+        language.getPrefixed("Commands.Run-Here.Done")
+                .replace("%placement%", placement.getName())
+                .replace("%island%", island.getName())
+                .send(sender);
         return CommandResult.SUCCESS;
     }
 

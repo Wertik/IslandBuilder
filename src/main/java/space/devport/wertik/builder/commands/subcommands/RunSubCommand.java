@@ -23,8 +23,7 @@ public class RunSubCommand extends IslandBuilderSubCommand {
     protected CommandResult perform(CommandSender sender, String label, String[] args) {
         Placement placement = plugin.getPlacementManager().getPlacement(args[0]);
         if (placement == null) {
-            //TODO lang
-            sender.sendMessage(StringUtil.color("&cInvalid placement."));
+            language.sendPrefixed(sender, "Commands.Invalid-Placement");
             return CommandResult.FAILURE;
         }
 
@@ -33,8 +32,7 @@ public class RunSubCommand extends IslandBuilderSubCommand {
             superiorPlayer = SuperiorSkyblockAPI.getPlayer(args[1]);
 
             if (superiorPlayer == null) {
-                //TODO lang
-                sender.sendMessage(StringUtil.color("&cPlayer does not exist."));
+                language.sendPrefixed(sender, "Commands.Invalid-Player");
                 return CommandResult.FAILURE;
             }
         } else {
@@ -45,21 +43,22 @@ public class RunSubCommand extends IslandBuilderSubCommand {
         }
 
         if (superiorPlayer == null || superiorPlayer.asPlayer() == null) {
-            //TODO lang
-            sender.sendMessage(StringUtil.color("&cInvalid player."));
+            language.sendPrefixed(sender, "Commands.Invalid-Player");
             return CommandResult.FAILURE;
         }
 
         Island island = superiorPlayer.getIsland();
 
         if (island == null) {
-            //TODO lang
-            sender.sendMessage(StringUtil.color("&cPlayer does not have an island."));
+            language.sendPrefixed(sender, "Commands.Run.No-Island");
             return CommandResult.FAILURE;
         }
 
         placement.run(superiorPlayer.asPlayer(), island);
-        sender.sendMessage(StringUtil.color("&7Placement &f" + placement.getName() + " &7ran for the island of &f" + superiorPlayer.getName()));
+        language.getPrefixed("Commands.Run.Done")
+                .replace("%placement%", placement.getName())
+                .replace("%player%", superiorPlayer.getName())
+                .send(sender);
         return CommandResult.SUCCESS;
     }
 

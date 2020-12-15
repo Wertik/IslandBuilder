@@ -6,10 +6,7 @@ import space.devport.utils.configuration.Configuration;
 import space.devport.wertik.builder.IslandBuilderPlugin;
 import space.devport.wertik.builder.system.placement.struct.Placement;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -43,6 +40,10 @@ public class PlacementManager {
 
     public Placement getPlacement(String name) {
         return this.loadedPlacements.get(name);
+    }
+
+    public Set<Placement> getPlacements() {
+        return new HashSet<>(this.loadedPlacements.values());
     }
 
     public Set<Placement> getPlacements(Predicate<Placement> condition) {
