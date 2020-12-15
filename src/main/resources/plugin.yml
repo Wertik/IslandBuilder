@@ -1,0 +1,11 @@
+name: @name@
+main: @main_class@
+version: @version@
+depend: [ SuperiorSkyblock2 ]
+softdepend: [ PlaceholderAPI ]
+api-version: 1.13
+authors: [ qwz ]
+commands:
+  islandbuilder:
+    aliases: [ ib, builder ]
+    description: Main plugin command.

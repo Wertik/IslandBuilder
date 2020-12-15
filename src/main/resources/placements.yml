@@ -1,0 +1,22 @@
+# Placement configuration for @name@
+#
+# Version: @version@
+
+placement-one:
+
+  # Triggers: create
+  trigger: "create"
+
+  # Delay in seconds.
+  delay: 10
+
+  # Define custom placeholders for the placement template.
+  # You can use PlaceholderAPI placeholders inside.
+  # Math supported! Yay!
+  placeholders:
+    location_x: '%island_location_x%+30'
+    location_y: '%island_location_y%'
+    location_z: '%island_location_z%'
+  rewards:
+    commands:
+      - 'portaleditor place one %island_location_world%;%location_x%;%location_y%;%location_z%'

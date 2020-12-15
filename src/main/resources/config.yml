@@ -1,0 +1,6 @@
+# Configuration for @name@
+#
+# Version: @version@
+
+plugin-prefix: '&6Island Builder &8| '
+debug-enabled: false
